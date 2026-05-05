@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>{{ config('app.name', 'JTIntern') }}</title>
+        <title>{{ $title ?? config('app.name', 'JTIntern') }}</title>
 
         {{-- Google Fonts --}}
         <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -49,6 +49,10 @@
 
         {{-- Footer --}}
         @include('layouts_admin.footer')
+
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
 
         {{-- =============================================
         JavaScript

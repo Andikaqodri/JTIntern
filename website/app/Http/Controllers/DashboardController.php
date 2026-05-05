@@ -14,7 +14,7 @@ class DashboardController extends Controller
         return view('admin_dashboard.index', [
             'activeMenu' => 'dashboard',
             'breadcrumb' => 'Welcome to Dashboard',
-            'title' => 'JTIntern - Sistem Rekomendasi Tempat Magang',
+            'title' => 'Dashboard Admin - JTIntern',
             'totalMahasiswa' => User::count(),
             'totalLowongan' => LowonganModel::count(),
             'totalPerusahaan' => PerusahaanModel::count(),

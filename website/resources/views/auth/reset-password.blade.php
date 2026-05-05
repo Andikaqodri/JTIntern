@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? 'Login Page' }}</title>
+    <title>{{ $title ?? 'Reset Password' }}</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
@@ -16,14 +16,15 @@
             <img src="{{ asset('images/JTIntern_resize.png') }}" alt="JTIntern">
         </a>
 
-        <section class="login-card" aria-labelledby="login-title">
+        <section class="login-card" aria-labelledby="reset-title">
             <div class="login-card__header">
-                <h1 id="login-title">ADMIN PANEL</h1>
-                <p>POLITEKNIK NEGERI MALANG</p>
+                <h1 id="reset-title">RESET PASSWORD</h1>
+                <p>ADMIN JTINTERN</p>
             </div>
 
-            <form class="login-form" method="POST" action="{{ route('login.store') }}">
+            <form class="login-form" method="POST" action="{{ route('password.update') }}">
                 @csrf
+                <input type="hidden" name="token" value="{{ $token }}">
 
                 @if ($errors->any())
                     <div class="login-alert">
@@ -31,39 +32,33 @@
                     </div>
                 @endif
 
-                @if (session('status'))
-                    <div class="login-alert login-alert--success">
-                        {{ session('status') }}
-                    </div>
-                @endif
-
-                <label for="username">USERNAME</label>
+                <label for="email">EMAIL ADMIN</label>
                 <div class="input-group">
                     <i class="bi bi-envelope" aria-hidden="true"></i>
-                    <input id="username" type="email" name="username" value="{{ old('username') }}" placeholder="Masukkan email admin" autocomplete="username" required>
+                    <input id="email" type="email" name="email" value="{{ old('email', $email) }}" placeholder="Masukkan email admin" autocomplete="email" required>
                 </div>
 
-                <label for="password">PASSWORD</label>
+                <label for="password">PASSWORD BARU</label>
                 <div class="input-group">
                     <i class="bi bi-lock" aria-hidden="true"></i>
-                    <input id="password" type="password" name="password" placeholder="********" autocomplete="current-password" required>
-                    <button class="password-toggle" type="button" data-password-toggle="password" aria-label="Lihat password">
+                    <input id="password" type="password" name="password" placeholder="Minimal 8 karakter" autocomplete="new-password" required>
+                    <button class="password-toggle" type="button" data-password-toggle="password" aria-label="Lihat password baru">
                         <i class="bi bi-eye" aria-hidden="true"></i>
                     </button>
                 </div>
 
-                <div class="login-options">
-                    <label class="remember-check" for="remember">
-                        <input id="remember" type="checkbox" name="remember" value="1" {{ old('remember') ? 'checked' : '' }}>
-                        <span>Remember me</span>
-                    </label>
-
-                    <a class="forgot-link" href="{{ route('password.request') }}">Lupa Password?</a>
+                <label for="password_confirmation">KONFIRMASI PASSWORD</label>
+                <div class="input-group">
+                    <i class="bi bi-shield-lock" aria-hidden="true"></i>
+                    <input id="password_confirmation" type="password" name="password_confirmation" placeholder="Ulangi password baru" autocomplete="new-password" required>
+                    <button class="password-toggle" type="button" data-password-toggle="password_confirmation" aria-label="Lihat konfirmasi password">
+                        <i class="bi bi-eye" aria-hidden="true"></i>
+                    </button>
                 </div>
 
                 <button type="submit" class="login-submit">
-                    Login
-                    <i class="bi bi-box-arrow-in-right" aria-hidden="true"></i>
+                    Simpan Password
+                    <i class="bi bi-check2-circle" aria-hidden="true"></i>
                 </button>
             </form>
 

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? 'Login Page' }}</title>
+    <title>{{ $title ?? 'Lupa Password' }}</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
@@ -16,13 +16,13 @@
             <img src="{{ asset('images/JTIntern_resize.png') }}" alt="JTIntern">
         </a>
 
-        <section class="login-card" aria-labelledby="login-title">
+        <section class="login-card" aria-labelledby="forgot-title">
             <div class="login-card__header">
-                <h1 id="login-title">ADMIN PANEL</h1>
-                <p>POLITEKNIK NEGERI MALANG</p>
+                <h1 id="forgot-title">LUPA PASSWORD</h1>
+                <p>ADMIN JTINTERN</p>
             </div>
 
-            <form class="login-form" method="POST" action="{{ route('login.store') }}">
+            <form class="login-form" method="POST" action="{{ route('password.email') }}">
                 @csrf
 
                 @if ($errors->any())
@@ -37,34 +37,20 @@
                     </div>
                 @endif
 
-                <label for="username">USERNAME</label>
+                <label for="email">EMAIL ADMIN</label>
                 <div class="input-group">
                     <i class="bi bi-envelope" aria-hidden="true"></i>
-                    <input id="username" type="email" name="username" value="{{ old('username') }}" placeholder="Masukkan email admin" autocomplete="username" required>
-                </div>
-
-                <label for="password">PASSWORD</label>
-                <div class="input-group">
-                    <i class="bi bi-lock" aria-hidden="true"></i>
-                    <input id="password" type="password" name="password" placeholder="********" autocomplete="current-password" required>
-                    <button class="password-toggle" type="button" data-password-toggle="password" aria-label="Lihat password">
-                        <i class="bi bi-eye" aria-hidden="true"></i>
-                    </button>
-                </div>
-
-                <div class="login-options">
-                    <label class="remember-check" for="remember">
-                        <input id="remember" type="checkbox" name="remember" value="1" {{ old('remember') ? 'checked' : '' }}>
-                        <span>Remember me</span>
-                    </label>
-
-                    <a class="forgot-link" href="{{ route('password.request') }}">Lupa Password?</a>
+                    <input id="email" type="email" name="email" value="{{ old('email') }}" placeholder="Masukkan email admin" autocomplete="email" required>
                 </div>
 
                 <button type="submit" class="login-submit">
-                    Login
-                    <i class="bi bi-box-arrow-in-right" aria-hidden="true"></i>
+                    Kirim Link Reset
+                    <i class="bi bi-send" aria-hidden="true"></i>
                 </button>
+
+                <div class="login-options login-options--center">
+                    <a class="forgot-link" href="{{ route('login') }}">Kembali ke Login</a>
+                </div>
             </form>
 
             <p class="login-copy">&copy; 2026 JTINTERN</p>
@@ -94,7 +80,5 @@
             <div class="art-plus"><i class="bi bi-plus-lg"></i></div>
         </section>
     </main>
-
-    <script src="{{ asset('js/password-toggle.js') }}"></script>
 </body>
 </html>

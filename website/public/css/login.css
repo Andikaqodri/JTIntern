@@ -104,6 +104,11 @@ body {
     background: #fff1f0;
 }
 
+.login-alert--success {
+    color: #116329;
+    background: #e9f8ee;
+}
+
 .login-form label {
     margin: 0 0 8px;
     font-size: 9px;
@@ -139,6 +144,11 @@ body {
     background: #f6f6f8;
 }
 
+.input-group input[type="password"],
+.input-group input.password-visible {
+    padding-right: 52px;
+}
+
 .input-group input::placeholder {
     color: #bdc2cc;
 }
@@ -147,9 +157,70 @@ body {
     box-shadow: 0 0 0 3px rgba(53, 168, 0, 0.14);
 }
 
-.forgot-link {
-    align-self: flex-end;
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    color: #7b8491;
+    cursor: pointer;
+    background: transparent;
+    transform: translateY(-50%);
+}
+
+.password-toggle:hover,
+.password-toggle:focus {
+    color: #30a900;
+    background: rgba(48, 169, 0, 0.08);
+    outline: 0;
+}
+
+.password-toggle i {
+    position: static;
+    transform: none;
+    font-size: 16px;
+}
+
+.login-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
     margin: -6px 0 38px;
+}
+
+.login-options--center {
+    justify-content: center;
+    margin: 24px 0 0;
+}
+
+.remember-check {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.remember-check input {
+    width: 14px;
+    height: 14px;
+    margin: 0;
+    accent-color: #30a900;
+}
+
+.remember-check span {
+    font-size: 10px;
+    font-weight: 800;
+    color: #58626a;
+}
+
+.forgot-link {
     font-size: 10px;
     font-weight: 800;
     color: #f00000;
