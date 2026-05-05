@@ -19,7 +19,6 @@ use App\Http\Controllers\WelcomeController;
 // Landing Page
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
 Route::get('/tentang', [WelcomeController::class, 'tentang'])->name('tentang');
-Route::get('/masuk', [WelcomeController::class, 'masuk'])->name('masuk');
 
 Route::group(['prefix' => 'rekomendasi'], function () {
     Route::get('/', [RekomendasiController::class, 'index'])->name('rekomendasi');
@@ -31,6 +30,7 @@ Route::group(['prefix' => 'rekomendasi'], function () {
 
 // Login route 
 Route::get('/masuk', [AuthController::class, 'index'])->name('login');
+Route::post('/masuk', [AuthController::class, 'store'])->name('login.store');
 
 // sementara TANPA middleware dan auth controller, nanti ditambahkan setelah auth selesai dibuat
 Route::prefix('admin')->name('admin.')->group(function () {

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdminModel;
 use App\Models\AuthModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -12,7 +14,9 @@ class AuthController extends Controller
      */
     public function index()
     {
-        // 
+        return view('auth.login', [
+            'title' => 'Login Page',
+        ]);
     }
 
     /**
@@ -28,7 +32,24 @@ class AuthController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $credentials = $request->validate([
+            'username' => ['required', 'string'],
+            'password' => ['required', 'string'],
+        ]);
+
+        $admin = AdminModel::where('username', $credentials['username'])->first();
+
+        if (! $admin || ! Hash::check($credentials['password'], $admin->password)) {
+            return back()
+                ->withErrors(['username' => 'Username atau password salah.'])
+                ->onlyInput('username');
+        }
+
+        $request->session()->regenerate();
+        $request->session()->put('admin_id', $admin->id);
+        $request->session()->put('admin_nama', $admin->nama_lengkap);
+
+        return redirect()->route('admin.dashboard');
     }
 
     /**

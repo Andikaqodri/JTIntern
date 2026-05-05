@@ -21,7 +21,7 @@
                     </li>
                 </ul>
                 <br>
-                <a class="btn btn-sm-primary login-button" href="{{ route('admin.dashboard') }}">Masuk sebagai Admin</a>
+                <a class="btn btn-sm-primary login-button" href="{{ route('login') }}">Masuk sebagai Admin</a>
             </div>
         </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
